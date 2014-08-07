@@ -488,9 +488,9 @@ let aceOfSpades = Card(rank: .Ace, suit: .Spades)
 let aceOfSpadesDescription = aceOfSpades.simpleDescription()
 
 let fullDeck = Card.fullDeck()
-for(deck, cards) in fullDeck{
-    var deckDescription = deck.simpleDescription()
-    println("\n ---- \(deckDescription) ----")
+for(suit, cards) in fullDeck{
+    var suitDescription = suit.simpleDescription()
+    println("\n ---- \(suitDescription) ----")
     for card in cards{
         var cardDescription = card.simpleDescription()
         println(cardDescription)
