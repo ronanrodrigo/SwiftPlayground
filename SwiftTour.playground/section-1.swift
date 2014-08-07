@@ -489,11 +489,9 @@ let aceOfSpadesDescription = aceOfSpades.simpleDescription()
 
 let fullDeck = Card.fullDeck()
 for(suit, cards) in fullDeck{
-    var suitDescription = suit.simpleDescription()
-    println("\n ---- \(suitDescription) ----")
+    println("\n ---- \(suit.simpleDescription()) ----")
     for card in cards{
-        var cardDescription = card.simpleDescription()
-        println(cardDescription)
+        println(card.simpleDescription())
     }
 }
 
