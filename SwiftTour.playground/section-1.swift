@@ -395,17 +395,20 @@ enum Rank: Int{
     func simpleDescription() -> String {
         switch self{
         case .Ace:
-            return "ace"
+            return "Ace"
         case .Jack:
-            return "jack"
+            return "Jack"
         case .Queen:
-            return "queen"
+            return "Queen"
         case .King:
-            return "king"
+            return "King"
         default:
             return String(self.toRaw())
             
         }
+    }
+    static func allRanks() -> [Rank]{
+        return [Rank.Ace, Rank.Two, Rank.Three, Rank.Five, Rank.Six, Rank.Seven, Rank.Eight, Rank.Nine, Rank.Ten, Rank.Jack, Rank.Queen, Rank.King]
     }
 }
 let ace = Rank.Ace
@@ -418,6 +421,7 @@ seven.toRaw() > jack.toRaw()
 jack.toRaw()
 three.simpleDescription()
 
+
 if let convertedRank = Rank.fromRaw(1){
     let aceDescription = convertedRank.simpleDescription()
 }
@@ -428,13 +432,13 @@ enum Suit{
     func simpleDescription() -> String{
         switch self {
         case .Spades:
-            return "spades"
+            return "Spades"
         case .Hearts:
-            return "heatrs"
+            return "Hearts"
         case .Diamonds:
-            return "diamonds"
+            return "Diamonds"
         case .Clubs:
-            return "clubs"
+            return "Clubs"
         }
     }
     
@@ -445,6 +449,10 @@ enum Suit{
         default:
             return "black"
         }
+    }
+    
+    static func allSuits() -> [Suit]{
+        return [Suit.Spades, Suit.Hearts, Suit.Diamonds, Suit.Clubs]
     }
 }
 let hearts = Suit.Hearts
@@ -460,6 +468,18 @@ struct Card {
     func simpleDescription() -> String{
         return "The \(rank.simpleDescription()) of \(suit.simpleDescription()). \(suit.simpleDescription().capitalizedString) are \(suit.color())."
     }
+
+    static func fullDeck() -> [Suit: [Card]]{
+        var deck = [Suit: [Card]]()
+        for suit in Suit.allSuits(){
+            var cards: [Card] = []
+            for rank in Rank.allRanks(){
+                cards.append(Card(rank: rank, suit: suit))
+            }
+            deck[suit] = cards
+        }
+        return deck
+    }
 }
 let threeOfHearts = Card(rank: .Three, suit: .Hearts)
 let threeOfSpadesDescription = threeOfHearts.simpleDescription()
@@ -467,7 +487,14 @@ let threeOfSpadesDescription = threeOfHearts.simpleDescription()
 let aceOfSpades = Card(rank: .Ace, suit: .Spades)
 let aceOfSpadesDescription = aceOfSpades.simpleDescription()
 
-
-
+let fullDeck = Card.fullDeck()
+for(deck, cards) in fullDeck{
+    var deckDescription = deck.simpleDescription()
+    println("\n ---- \(deckDescription) ----")
+    for card in cards{
+        var cardDescription = card.simpleDescription()
+        println(cardDescription)
+    }
+}
 
 
